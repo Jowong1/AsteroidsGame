@@ -29,8 +29,12 @@ class Spaceship extends Floater//extends Floater
   
   public void show(){
     //translate(500,325);
+    // Translates to center of ship
     translate((float)myCenterX, (float)myCenterY);
+    // Sets the rotation point to center of ship
+    float dRadians = (float)(myPointDirection*(Math.PI/180));
     //noStroke();
+    rotate(dRadians);
     rectMode(CENTER);
     fill(77, 68, 68);
     rect(0, 0, 30, 18);
@@ -51,4 +55,11 @@ class Spaceship extends Floater//extends Floater
     rect(5, 0, 20, 6);
     fill(57, 48, 48);
   }
+  
+  public void constantVel(double dAmount)   
+  {          
+    double dRadians =myPointDirection*(Math.PI/180);     
+    myDirectionX = ((dAmount) * Math.cos(dRadians));    
+    myDirectionY = ((dAmount) * Math.sin(dRadians));       
+  } 
 }
