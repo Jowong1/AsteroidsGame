@@ -89,7 +89,7 @@ class Spaceship extends Floater//extends Floater
   public void acceleratee (double dAmount)   
   {          
     //convert the current direction the floater is pointing to radians    
-    double dRadians =myPointDirection*(Math.PI/180);   
+    double dRadians = myPointDirection*(Math.PI/180);   
     //change coordinates of direction of travel    
     myDirectionX += ((dAmount) * Math.cos(dRadians));    
     myDirectionY += ((dAmount) * Math.sin(dRadians));    

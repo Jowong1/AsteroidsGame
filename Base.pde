@@ -69,6 +69,11 @@ class Base{
     if(mouseX > bCX + 175 && mouseX < bCX + 225 && mouseY > bCY + 125 && mouseY < bCY + 225){
       text("0" , bCX + 200, bCY + 175);
     }
+    if(clicked == true){
+      fill(255);
+      strokeWeight(5);
+      ellipse(bCX - 200, bCY - 175, 100, 100);
+    }
     if(clicked == true && mouseX < bCX - 175 && mouseX > bCX - 225 && mouseY < bCY - 125 && mouseY > bCY - 225){
       uSpeed++;
       clicked = false;
