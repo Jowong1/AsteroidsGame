@@ -6,6 +6,7 @@ class Base{
   }
   private int bCX;
   private int bCY;
+  private float spinSpokes;
   //private String leftBox;
   //private int uSpeed;
   //float rot;
@@ -21,6 +22,7 @@ class Base{
     if(bCY < 825 && bCY > -175 && bCX < 750 && bCX > 250){// Original 0 < bCY < 600
       shipInterior();
       shipItems();
+      shipMines();
       shipUpgrades();
     }else{
       shipExterior();
@@ -31,6 +33,55 @@ class Base{
     //Reset strokeWeight and stroke
     strokeWeight(1);
     stroke(0);
+  }
+  
+  public void shipMines(){
+    rect(bCX, bCY - 365, 160, 160);
+    rect(bCX, bCY + 365, 160, 160);
+    // Feet
+    noStroke();
+    fill(100);
+    ellipse(bCX - 60, bCY - 425, 30, 30);
+    ellipse(bCX + 60, bCY - 425, 30, 30);
+    ellipse(bCX - 60, bCY - 305, 30, 30);
+    ellipse(bCX + 60, bCY - 305, 30, 30);
+    fill(125);
+    ellipse(bCX - 60, bCY - 425, 15, 15);
+    ellipse(bCX + 60, bCY - 425, 15, 15);
+    ellipse(bCX - 60, bCY - 305, 15, 15);
+    ellipse(bCX + 60, bCY - 305, 15, 15);
+    // Legs
+    stroke(150);
+    line(bCX - 60, bCY - 305, bCX - 20, bCY - 355);
+    line(bCX + 60, bCY - 305, bCX + 20, bCY - 355);
+    line(bCX - 60, bCY - 425, bCX - 20, bCY - 375);
+    line(bCX + 60, bCY - 425, bCX + 20, bCY - 375);
+    // Container
+    noStroke();
+    fill(100);
+    fill(125);
+    ellipse(bCX, bCY - 365, 100, 100);
+    fill(50);
+    ellipse(bCX, bCY - 365, 80, 80);
+    // Spokes
+    fill(150);
+    pushMatrix();
+    translate(bCX, bCY - 365);
+    rotate(spinSpokes);
+    popMatrix();
+    pushMatrix();
+    translate(bCX, bCY - 365);
+    rotate(spinSpokes);
+    rect(0, -35,5,10);
+    rotate(0.5);
+    rect(35,0,10,5);
+    rotate(-1);
+    rect(-35,0,10,5);
+    popMatrix();
+    spinSpokes = spinSpokes + 0.01;
+    fill(50);
+    ellipse(bCX, bCY - 365, 60, 60);
+    
   }
   
   public void shipItems(){
@@ -50,6 +101,7 @@ class Base{
     fill(180);
     // Left Boxes
     //leftBox = "mouseX < bCX - 175 && mouseX > bCX - 225 && mouseY < bCY - 125 && mouseY > bCY - 225";
+    //Speed, Turn, Rate(of fire), Health, Hyperspace, Gun?
     if(mouseX < bCX - 175 && mouseX > bCX - 225 && mouseY < bCY - 125 && mouseY > bCY - 225){
       text(uSpeed , bCX - 200, bCY - 175);
     }
@@ -68,11 +120,6 @@ class Base{
     }
     if(mouseX > bCX + 175 && mouseX < bCX + 225 && mouseY > bCY + 125 && mouseY < bCY + 225){
       text("0" , bCX + 200, bCY + 175);
-    }
-    if(clicked == true){
-      fill(255);
-      strokeWeight(5);
-      ellipse(bCX - 200, bCY - 175, 100, 100);
     }
     if(clicked == true && mouseX < bCX - 175 && mouseX > bCX - 225 && mouseY < bCY - 125 && mouseY > bCY - 225){
       uSpeed++;

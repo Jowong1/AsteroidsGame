@@ -76,9 +76,9 @@ public void draw(){
 public void mousePressed(){
   clicked = true;
 }
-public void mouseReleased(){
-  clicked = false;
-}
+//public void mouseReleased(){
+//  //clicked = false;
+//}
 public void keyPressed(){
   releasedKey = false;
   if(key == 'w'){accelerating = true;}
