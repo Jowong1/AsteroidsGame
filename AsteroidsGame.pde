@@ -73,7 +73,7 @@ public void draw(){
   //fighter.myCenterX = lerp((int)fighter.myCenterX, (int)ex, 0.01);
   
 }
-public void mouseClicked(){
+public void mousePressed(){
   clicked = true;
 }
 public void mouseReleased(){
