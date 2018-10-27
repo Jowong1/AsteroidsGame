@@ -1,18 +1,21 @@
 Spaceship fighter;
-Star[] stars= new Star[200];
+Star[] stars = new Star[2000];
+Base home;
 boolean accelerating, decelerating, leftTurn, rightTurn;
-boolean releasedKey = false;
+boolean releasedKey = false, clicked = false;
 int accelerateCount = 0;
 int decelerateCount = 0;
 double ex;
 int maxSpdCtAcc;
 int maxSpdCtDec;
+int uSpeed;
 //stars = [];
 public void setup(){
   size(1000,650);
   background(0);
   //frameRate(50);
   fighter = new Spaceship();
+  home = new Base();
   //stars[i].setX((int)random(width));
   //stars.setY(random(height));
   //stars.setR(10);
@@ -29,9 +32,11 @@ public void setup(){
 public void draw(){
   background(0);
   //translate(0,0);
+  //home.show();
   for(int i = 0; i < stars.length; i++){
     stars[i].show();
   }
+  home.show();
   /*
   you get from the point you released rotate 2) find the difference
   (point1 vs point2 // point1 - point2) and accelerate(opposite) or (towards point 1)
@@ -40,13 +45,15 @@ public void draw(){
   //println(
   fighter.show();
   fighter.move();
+  fighter.decelerate();
+  
   if(accelerating == true){// && maxSpdCtAcc <= 100){ // && leftTurn == false && rightTurn == false
-    fighter.constantVel(5); //fighter.constantVel(5); //fighter.accelerate(0.1);
+    fighter.accelerate(0.5); //fighter.constantVel(5); //fighter.accelerate(0.1);
     accelerateCount = accelerateCount + 1;
     maxSpdCtAcc = maxSpdCtAcc + 1;
   }
   if(decelerating == true){// && maxSpdCtAcc >= -100){ // && leftTurn == false && rightTurn == false
-    fighter.constantVel(-5); //fighter.constantVel(-5); //fighter.accelerate(-0.1);
+    fighter.accelerate(-0.2); //fighter.constantVel(-5); //fighter.accelerate(-0.1);
     decelerateCount += 1;
     maxSpdCtAcc = maxSpdCtAcc - 1;
   }
@@ -62,10 +69,16 @@ public void draw(){
   //  fighter.accelerate(-0.1);
   //}
   //////////println(accelerateCount);
-  println(maxSpdCtAcc);
+  //println(maxSpdCtAcc);
   //fighter.myCenterX = lerp((int)fighter.myCenterX, (int)ex, 0.01);
+  
 }
-
+public void mouseClicked(){
+  clicked = true;
+}
+public void mouseReleased(){
+  clicked = false;
+}
 public void keyPressed(){
   releasedKey = false;
   if(key == 'w'){accelerating = true;}

@@ -28,6 +28,7 @@ class Spaceship extends Floater//extends Floater
   public double getPointDirection() {return(myPointDirection);}
   
   public void show(){
+    stroke(0);
     //translate(500,325);
     // Translates to center of ship
     translate((float)myCenterX, (float)myCenterY);
@@ -36,13 +37,22 @@ class Spaceship extends Floater//extends Floater
     //noStroke();
     rotate(dRadians);
     rectMode(CENTER);
+    if(accelerating == true){
+      noStroke();
+      fill(255, 93, 0, 130);
+      ellipse(-35, 0, 20, 12);
+      fill(255, 93, 0, 80);
+      ellipse(-32, 0, 12, 6);
+    }
+    stroke(0);
     fill(77, 68, 68);
     rect(0, 0, 30, 18);
     rect(10, 0, 30, 12);
     rect(10, 0, 45, 6);
     rect(-15, 0, 5, 70);
-    rect(-11, -35, 20, 5); //left wing
     rect(-11, -31, 6, 5);
+    rect(-11, -35, 20, 5); //left wing
+    //rect(-11, -31, 6, 5);
     rect(-11, 31, 6, 5);
     rect(-11, 35, 20, 5); //right wing
     rect(-11, 0, 5, 40);
@@ -54,6 +64,19 @@ class Spaceship extends Floater//extends Floater
     fill(0, 0, 255, 100);
     rect(5, 0, 20, 6);
     fill(57, 48, 48);
+    
+    if(decelerating == true){
+      noStroke();
+      fill(255, 0, 0);
+      ellipse(-20, -34, 3, 3);
+      fill(255, 0, 0, 80);
+      ellipse(-22, -34, 10, 10);
+      
+      fill(255, 0, 0);
+      ellipse(-20, 34, 3, 3);
+      fill(255, 0, 0, 80);
+      ellipse(-22, 34, 10, 10);
+    }
   }
   
   public void constantVel(double dAmount)   
@@ -62,4 +85,21 @@ class Spaceship extends Floater//extends Floater
     myDirectionX = ((dAmount) * Math.cos(dRadians));    
     myDirectionY = ((dAmount) * Math.sin(dRadians));       
   } 
+  //Overrided floater acceleration function
+  public void accelerate (double dAmount)   
+  {          
+    //convert the current direction the floater is pointing to radians    
+    double dRadians =myPointDirection*(Math.PI/180);   
+    //change coordinates of direction of travel    
+    myDirectionX += ((dAmount) * Math.cos(dRadians));    
+    myDirectionY += ((dAmount) * Math.sin(dRadians));    
+  }  
+  public void decelerate ()   
+  {          
+    //convert the current direction the floater is pointing to radians    
+    //double dRadians =myPointDirection*(Math.PI/180);   
+    //change coordinates of direction of travel    
+    myDirectionX *= 0.97; 
+    myDirectionY *= 0.97;  
+  }   
 }
