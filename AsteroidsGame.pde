@@ -13,7 +13,7 @@ int uSpeed;
 public void setup(){
   size(1000,650);
   background(0);
-  //frameRate(50);
+  frameRate(40);
   fighter = new Spaceship();
   home = new Base();
   //stars[i].setX((int)random(width));
