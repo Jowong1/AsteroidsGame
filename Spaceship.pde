@@ -96,10 +96,12 @@ class Spaceship extends Floater//extends Floater
   }  
   public void deceleratee ()   
   {          
+    deceleratingDown = true;
     //convert the current direction the floater is pointing to radians    
     //double dRadians =myPointDirection*(Math.PI/180);   
     //change coordinates of direction of travel    
     myDirectionX *= 0.97; 
     myDirectionY *= 0.97;  
+    deceleratingDown = false;
   }   
 }
