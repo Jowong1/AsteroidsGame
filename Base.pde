@@ -75,6 +75,8 @@ class Base{
     }else{
       clicked = false;
     }
+    print(clicked);
+    print(uSpeed);
   }
   
   public void shipInterior(){
