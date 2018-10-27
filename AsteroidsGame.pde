@@ -2,7 +2,8 @@ Spaceship fighter;
 Star[] stars = new Star[2000];
 Base home;
 boolean accelerating, decelerating, leftTurn, rightTurn;
-boolean releasedKey = false, clicked = false;
+boolean releasedKey = false;
+boolean clicked = false;
 int accelerateCount = 0;
 int decelerateCount = 0;
 double ex;
@@ -12,7 +13,6 @@ int uSpeed;
 //stars = [];
 public void setup(){
   size(1000,650);
-  background(0);
   frameRate(40);
   fighter = new Spaceship();
   home = new Base();
