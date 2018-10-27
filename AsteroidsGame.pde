@@ -45,7 +45,7 @@ public void draw(){
   //println(
   fighter.show();
   fighter.move();
-  fighter.decelerate();
+  fighter.deceleratee();
   
   if(accelerating == true){// && maxSpdCtAcc <= 100){ // && leftTurn == false && rightTurn == false
     fighter.accelerate(0.5); //fighter.constantVel(5); //fighter.accelerate(0.1);
@@ -53,7 +53,7 @@ public void draw(){
     maxSpdCtAcc = maxSpdCtAcc + 1;
   }
   if(decelerating == true){// && maxSpdCtAcc >= -100){ // && leftTurn == false && rightTurn == false
-    fighter.accelerate(-0.2); //fighter.constantVel(-5); //fighter.accelerate(-0.1);
+    fighter.acceleratee(-0.2); //fighter.constantVel(-5); //fighter.accelerate(-0.1);
     decelerateCount += 1;
     maxSpdCtAcc = maxSpdCtAcc - 1;
   }

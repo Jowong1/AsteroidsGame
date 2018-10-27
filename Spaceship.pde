@@ -86,7 +86,7 @@ class Spaceship extends Floater//extends Floater
     myDirectionY = ((dAmount) * Math.sin(dRadians));       
   } 
   //Overrided floater acceleration function
-  public void accelerate (double dAmount)   
+  public void acceleratee (double dAmount)   
   {          
     //convert the current direction the floater is pointing to radians    
     double dRadians =myPointDirection*(Math.PI/180);   
@@ -94,7 +94,7 @@ class Spaceship extends Floater//extends Floater
     myDirectionX += ((dAmount) * Math.cos(dRadians));    
     myDirectionY += ((dAmount) * Math.sin(dRadians));    
   }  
-  public void decelerate ()   
+  public void deceleratee ()   
   {          
     //convert the current direction the floater is pointing to radians    
     //double dRadians =myPointDirection*(Math.PI/180);   
