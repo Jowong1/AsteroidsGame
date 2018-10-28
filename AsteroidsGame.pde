@@ -14,10 +14,12 @@ int uSpeed;
 // CURRENCY
 int nova;
 boolean deceleratingDown;
+boolean away;
 
 public void setup(){
   size(1000,650);
   frameRate(40);
+  //strokeJoin(ROUND);
   fighter = new Spaceship();
   home = new Base();
   //stars[i].setX((int)random(width));
@@ -55,6 +57,7 @@ public void draw(){
   */
   translate(width/2 - (int)fighter.myCenterX, height/2 - (int)fighter.myCenterY);
   pushMatrix();
+  //translate(width/2 - (int)fighter.myCenterX, height/2 - (int)fighter.myCenterY);
   fighter.show();
   fighter.move();
   fighter.deceleratee();
@@ -64,6 +67,23 @@ public void draw(){
   //if(accelerating == false && deceleratingDown == false){
   text("Nova: $" + nova, (int)fighter.myCenterX - 400 , (int)fighter.myCenterY - 250);
   //}
+  float distFromBaseXz = (900- (float)fighter.myCenterX)-(width/2);
+  float distFromBaseYz = (725- (float)fighter.myCenterY)-(height/2);
+  textSize(15);
+  int di = ((int)((dist(width/2, height/2, distFromBaseXz + width/2, distFromBaseYz + height/2))/10)*10);
+  if(away == true){
+    text("Distance from Base: " + di + "m", (int)fighter.myCenterX - 400 , (int)fighter.myCenterY - 230);
+  }
+  /*
+  pushMatrix();
+  translate(0,0);
+    float distFromBaseXy = (900- (float)fighter.myCenterX)-(width/2);
+  float distFromBaseYy = (725- (float)fighter.myCenterY)-(height/2);
+  int diy = ((int)((dist(width/2, height/2, distFromBaseXz + width/2, distFromBaseYz + height/2))/10)*10);
+
+  text("Distance from Base: " + diy + "m", 50, 50);
+  popMatrix();
+  */
   if(accelerating == true){// && maxSpdCtAcc <= 100){ // && leftTurn == false && rightTurn == false
     fighter.accelerate(0.5); //fighter.constantVel(5); //fighter.accelerate(0.1);
   }

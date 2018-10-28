@@ -44,10 +44,11 @@ class Base{
       shipUpgrades();
       shipSigns();
     }else{
+      textSize(30);
       shipMines();
       shipExterior();
     }
-
+    arrowHome();
     //println((baseCenterX - (int)fighter.myCenterX) + ", " + (baseCenterY -(int)fighter.myCenterY));
     fill(255, 255, 255);
     //Reset strokeWeight and stroke
@@ -428,5 +429,27 @@ class Base{
       line(bCX + 623.5, bCY + 77, bCX + 376, bCY + 103 + 4);
       line(bCX + 623.5, bCY + 151.5, bCX + 376, bCY +177.5 + 4);
       line(bCX + 623.5, bCY + 226, bCX + 376, bCY + 252 + 4);
+    }
+    
+    public void arrowHome(){
+      float distFromBaseX = (baseCenterX - (float)fighter.myCenterX)-(width/2);
+      float distFromBaseY = (baseCenterY - (float)fighter.myCenterY)-(height/2);
+      //float di = dist(width/2, height/2, distFromBaseX + width/2, distFromBaseY + height/2);
+      //println(di);
+      if(distFromBaseX > 1000 || distFromBaseX < -1000 || distFromBaseY > 1000 || distFromBaseY < -1000){
+        away = true;
+        pushMatrix();
+      //float dRadians = (float)(myPointDirection*(Math.PI/180));
+      //translate(baseCenterX- (float)fighter.myCenterX, baseCenterY-(float)fighter.myCenterY);
+      //translate(0,0);
+      strokeWeight(1);
+      stroke(100, 200);
+      //line(0,0, (float)fighter.myCenterX - bCX + 100, (float)fighter.myCenterY - bCY - 75);
+      line(width/2,height/2, baseCenterX - (float)fighter.myCenterX, baseCenterY-(float)fighter.myCenterY);
+      //line(
+      popMatrix();
+      }else{
+        away = false;
+      }
     }
 }

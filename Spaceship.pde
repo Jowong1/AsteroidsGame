@@ -99,7 +99,8 @@ class Spaceship extends Floater//extends Floater
     deceleratingDown = true;
     //convert the current direction the floater is pointing to radians    
     //double dRadians =myPointDirection*(Math.PI/180);   
-    //change coordinates of direction of travel    
+    //change coordinates of direction of travel   
+    //line(0,0, (float)fighter.myCenterX -300, (float)fighter.myCenterY - 300);
     myDirectionX *= 0.97; 
     myDirectionY *= 0.97;  
     deceleratingDown = false;
