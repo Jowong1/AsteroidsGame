@@ -1,7 +1,10 @@
 Spaceship fighter;
 Star[] stars = new Star[2000];
+ArrayList <Bullet> projectile = new ArrayList<Bullet>();
+ArrayList <Asteroid> asteroids = new ArrayList<Asteroid>();
 Base home;
-boolean accelerating, decelerating, leftTurn, rightTurn;
+//Bullet projectile;
+boolean accelerating, decelerating, leftTurn, rightTurn, shoot;
 boolean releasedKey = false;
 boolean clicked = false;
 int accelerateCount = 0;
@@ -22,6 +25,7 @@ public void setup(){
   //strokeJoin(ROUND);
   fighter = new Spaceship();
   home = new Base();
+        //projectile = new Bullet();
   //stars[i].setX((int)random(width));
   //stars.setY(random(height));
   //stars.setR(10);
@@ -61,6 +65,26 @@ public void draw(){
   fighter.show();
   fighter.move();
   fighter.deceleratee();
+  for(int nI = 0;nI < projectile.size(); nI ++){
+    fill(255, 0, 0, 150);
+    noStroke();
+    projectile.get(nI).show();
+    projectile.get(nI).move();
+  }
+  for(int t = 0; t < asteroids.size(); t ++){
+    for(int j = 0; j < projectile.size(); j++){
+      if(dist(projectile.get(j).getX(),projectile.get(j).getY(), projectile.get(t).getX(), projectile.get(t).getY()) < 10){
+        projectile.remove(j);
+        asteroids.remove(t);
+        break;
+      }
+    }
+  }
+  if(shoot == true && frameCount % 10 == 0){
+      //shoot = false;
+      projectile.add(new Bullet(fighter));
+  }
+  
   popMatrix();
   fill(255);
   textAlign(CENTER);
@@ -118,6 +142,7 @@ public void keyPressed(){
   if(key == 's'){decelerating = true;}
   if(key == 'a'){leftTurn = true;}
   if(key == 'd'){rightTurn = true;}
+  if(keyCode == UP){shoot = true;}
 }
 
 public void keyReleased(){
@@ -126,4 +151,5 @@ public void keyReleased(){
   if(key == 's'){decelerating = false;}
   if(key == 'a'){leftTurn = false;}
   if(key == 'd'){rightTurn = false;}
+  if(keyCode == UP){shoot = false;}
 }
