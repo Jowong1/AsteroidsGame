@@ -14,6 +14,7 @@ class Base{
   private float part1Rad, part1Shade, part2Rad, part2Shade;
   private boolean mine1, mine2, activateMine1Sign, activateMine2Sign;
   private int signColor, signColorChange;
+  private int mine1Lvl = 1;
   //private String leftBox;
   //private int uSpeed;
   //float rot;
@@ -230,7 +231,72 @@ class Base{
     if(signColor < 5){
       signColorChange = 2;
     }
-    //signColorChange = signColorChange + 2;
+    if(mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY < bCY - 280 && mouseY > bCY - 450 && mine1 == true){
+      pushMatrix();
+      translate(mouseX, mouseY);
+      rectMode(CORNER);
+      fill(0);
+      strokeWeight(4);
+      stroke(0,255,0,150);
+      rect(15,-125, 180, 100);
+      line(0, 0, 15, -25);
+      noStroke();
+      fill(0,255,0,150);
+      //fill(5, 147, 24);
+      //fill(0);
+      ellipse(0,0,8,8);
+      textAlign(CENTER);
+      textSize(15);
+      text("Nova Mine" + " Lvl. " + mine1Lvl, 105, -102.5);
+      textSize(9);
+      textLeading(14);
+      //textAlign(LEFT);
+      text("A gift from the National Aeronautics\nand Space Administration of Earth,\nNova Mines were the most advanced\nnuclear fusion machines of the time.", 105, -82.5);
+      // Upgrade cost sign
+      fill(0);
+      stroke(0,255,0,150);
+      rect(40, 15, 155, 35);
+      line(0,0, 40, 15);
+      fill(0,255,0,150);
+      textSize(11);
+      text("Upgrade Cost: " + "500 Nova", 117.5, 30);
+       text("Click to Upgrade", 117.5, 42.5);
+      popMatrix();
+      textSize(30);
+    }
+    if(mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY > bCY + 280 && mouseY < bCY + 450 && mine2 == true){
+      pushMatrix();
+      translate(mouseX, mouseY);
+      rectMode(CORNER);
+      fill(0);
+      strokeWeight(4);
+      stroke(0,255,0,150);
+      rect(15,-125, 180, 100);
+      line(0, 0, 15, -25);
+      noStroke();
+      fill(0,255,0,150);
+      //fill(5, 147, 24);
+      //fill(0);
+      ellipse(0,0,8,8);
+      textAlign(CENTER);
+      textSize(15);
+      text("Nova Mine" + " Lvl. " + mine1Lvl, 105, -102.5);
+      textSize(9);
+      textLeading(14);
+      //textAlign(LEFT);
+      text("A gift from the National Aeronautics\nand Space Administration of Earth,\nNova Mines were the most advanced\nnuclear fusion machines of the time.", 105, -82.5);
+      // Upgrade cost sign
+      fill(0);
+      stroke(0,255,0,150);
+      rect(40, 15, 155, 35);
+      line(0,0, 40, 15);
+      fill(0,255,0,150);
+      textSize(11);
+      text("Upgrade Cost: " + "500 Nova", 117.5, 30);
+       text("Click to Upgrade", 117.5, 42.5);
+      popMatrix();
+      textSize(30);
+    }
   }
   public void shipItems(){
     // Left Boxes
