@@ -22,8 +22,9 @@ boolean away;
 public void setup(){
   size(1000,650);
   frameRate(40);
-  //strokeJoin(ROUND);
+  strokeJoin(ROUND);
   fighter = new Spaceship();
+  nova = 1000;
   home = new Base();
         //projectile = new Bullet();
   //stars[i].setX((int)random(width));

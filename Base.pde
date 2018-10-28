@@ -14,7 +14,17 @@ class Base{
   private float part1Rad, part1Shade, part2Rad, part2Shade;
   private boolean mine1, mine2, activateMine1Sign, activateMine2Sign;
   private int signColor, signColorChange;
-  private int mine1Lvl = 1;
+  private int mine1Lvl = 1, mine2Lvl = 1;
+  private float part1RadChange = 0.15;
+  private float part1ShadeChange = 1.5;
+  private int novaPerParticle1 = 1;
+  private int mine1UpgradeCost = 500;
+  private float part2RadChange = 0.15;
+  private float part2ShadeChange = 1.5;
+  private int novaPerParticle2 = 1;
+  private int mine2UpgradeCost = 500;
+
+
   //private String leftBox;
   //private int uSpeed;
   //float rot;
@@ -27,6 +37,27 @@ class Base{
     //rot = rot + 0.001;
     //fill(0,255,0,200);
     noFill();
+    //MINE 1
+    // LEVEL (ONE) MINE UPGRADE TO (TWO) $500 NOVA
+    if(clicked == true && mine1 == true && nova >= 500 && mine1Lvl == 1 && mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY < bCY - 280 && mouseY > bCY - 450){
+      nova = nova - 500;
+      part1RadChange = 0.3;
+      part1ShadeChange = 3;
+      novaPerParticle1 = 5;
+      mine1UpgradeCost = 1500;
+      mine1Lvl = 2;
+    }
+    //MINE 2
+    // LEVEL (ONE) MINE UPGRADE TO (TWO) $500 NOVA
+    if(clicked == true && mine2 == true && nova >= 500 && mine2Lvl == 1 && mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY > bCY + 280 && mouseY < bCY + 450){
+      nova = nova - 500;
+      part2RadChange = 0.3;
+      part2ShadeChange = 3;
+      novaPerParticle2 = 5;
+      mine2UpgradeCost = 1500;
+      mine2Lvl = 2;
+    }
+    // CHECK IF ACTIVATE MINE SIGNS ARE ON
     if(clicked == true && mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY < bCY - 280 && mouseY > bCY - 450){
       mine1 = true;
     }else{
@@ -194,22 +225,22 @@ class Base{
     }
     // Particle 1
     if(mine1 == true){
-      part1Rad = part1Rad + 0.15;
-      part1Shade = part1Shade + 1.5;
+      part1Rad = part1Rad + part1RadChange; // part1Rad = part1Rad + 0.15;
+      part1Shade = part1Shade + part1ShadeChange; // part1Shade = part1Shade + 1.5;
       if(part1Rad > 35){
         part1Rad = 1;
         part1Shade = 0;
-        nova++;
+        nova = nova + novaPerParticle1; // nova = nova + 1;
       }
     }
     // Particle 2
     if(mine2 == true){
-      part2Rad = part2Rad + 0.15;
-      part2Shade = part2Shade + 1.5;
+      part2Rad = part2Rad + part2RadChange; // part2Rad = part2Rad + 0.15;
+      part2Shade = part2Shade + part2ShadeChange; // part2Shade = part2Shade + 1.5;
       if(part2Rad > 35){
         part2Rad = 1;
         part2Shade = 0;
-        nova++;
+        nova = nova + novaPerParticle2; // nova = nova + 1;
       }
     }
   }
@@ -260,7 +291,7 @@ class Base{
       line(0,0, 40, 15);
       fill(0,255,0,150);
       textSize(11);
-      text("Upgrade Cost: " + "500 Nova", 117.5, 30);
+      text("Upgrade Cost: " + mine1UpgradeCost +" Nova", 117.5, 30);
        text("Click to Upgrade", 117.5, 42.5);
       popMatrix();
       textSize(30);
@@ -281,7 +312,7 @@ class Base{
       ellipse(0,0,8,8);
       textAlign(CENTER);
       textSize(15);
-      text("Nova Mine" + " Lvl. " + mine1Lvl, 105, -102.5);
+      text("Nova Mine" + " Lvl. " + mine2Lvl, 105, -102.5);
       textSize(9);
       textLeading(14);
       //textAlign(LEFT);
@@ -293,7 +324,7 @@ class Base{
       line(0,0, 40, 15);
       fill(0,255,0,150);
       textSize(11);
-      text("Upgrade Cost: " + "500 Nova", 117.5, 30);
+      text("Upgrade Cost: " + mine2UpgradeCost +" Nova", 117.5, 30);
        text("Click to Upgrade", 117.5, 42.5);
       popMatrix();
       textSize(30);
@@ -345,8 +376,6 @@ class Base{
     }else{
       clicked = false;
     }
-    //print(clicked);
-    //print(uSpeed);
   }
   
   public void shipInterior(){
