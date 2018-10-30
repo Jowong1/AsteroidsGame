@@ -14,6 +14,11 @@ class Base{
   private float part1Rad, part1Shade, part2Rad, part2Shade;
   private boolean mine1, mine2, activateMine1Sign, activateMine2Sign;
   private int signColor, signColorChange;
+  private float arrow1Bobbing;
+  private float arrow1BobbingShift = 0.8;
+  private float arrow2Bobbing;
+  private float arrow2BobbingShift = 0.8;
+  //MINE UPGRADES
   private int mine1Lvl = 1, mine2Lvl = 1;
   private float part1RadChange = 0.15;
   private float part1ShadeChange = 1.5;
@@ -23,7 +28,6 @@ class Base{
   private float part2ShadeChange = 1.5;
   private int novaPerParticle2 = 1;
   private int mine2UpgradeCost = 500;
-
 
   //private String leftBox;
   //private int uSpeed;
@@ -38,6 +42,15 @@ class Base{
     //fill(0,255,0,200);
     noFill();
     //MINE 1
+    // LEVEL (TWO) MINE UPGRADE TO (THREE) $1500 NOVA
+    if(clicked == true && nova >= 1500 && mine1Lvl == 2 && mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY < bCY - 280 && mouseY > bCY - 450){
+      nova = nova - 1500;
+      part1RadChange = 0.7;
+      part1ShadeChange = 7;
+      novaPerParticle1 = 10;
+      mine1UpgradeCost = 2500;
+      mine1Lvl = 3;
+    }
     // LEVEL (ONE) MINE UPGRADE TO (TWO) $500 NOVA
     if(clicked == true && mine1 == true && nova >= 500 && mine1Lvl == 1 && mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY < bCY - 280 && mouseY > bCY - 450){
       nova = nova - 500;
@@ -48,6 +61,15 @@ class Base{
       mine1Lvl = 2;
     }
     //MINE 2
+    // LEVEL (TWO) MINE UPGRADE TO (THREE) $1500 NOVA
+    if(clicked == true && nova >= 500 && mine2Lvl == 2 && mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY > bCY + 280 && mouseY < bCY + 450){
+      nova = nova - 1500;
+      part2RadChange = 0.7;
+      part2ShadeChange = 7;
+      novaPerParticle2 = 10;
+      mine2UpgradeCost = 2500;
+      mine2Lvl = 3;
+    }
     // LEVEL (ONE) MINE UPGRADE TO (TWO) $500 NOVA
     if(clicked == true && mine2 == true && nova >= 500 && mine2Lvl == 1 && mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY > bCY + 280 && mouseY < bCY + 450){
       nova = nova - 500;
@@ -57,6 +79,8 @@ class Base{
       mine2UpgradeCost = 1500;
       mine2Lvl = 2;
     }
+    
+    
     // CHECK IF ACTIVATE MINE SIGNS ARE ON
     if(clicked == true && mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY < bCY - 280 && mouseY > bCY - 450){
       mine1 = true;
@@ -250,11 +274,31 @@ class Base{
       fill(signColor);
       textSize(30);
       text("Click to\nActivate", bCX, bCY - 370);
+      noStroke();
+      rect(bCX, bCY - 201 + arrow1Bobbing, 10, 40);
+      triangle(bCX, bCY - 235 + arrow1Bobbing, bCX + 15, bCY - 220 + arrow1Bobbing, bCX - 15, bCY - 220 + arrow1Bobbing);
+      arrow1Bobbing = arrow1Bobbing + arrow1BobbingShift;
+      if(arrow1Bobbing < 0){
+        arrow1BobbingShift = 0.8;
+      }
+      if(arrow1Bobbing > 15){
+        arrow1BobbingShift = -0.8;
+      }
     }
     if(activateMine2Sign == true && mine2 == false){
       fill(signColor);
       textSize(30);
       text("Click to\nActivate", bCX, bCY + 360);
+      noStroke();
+      rect(bCX, bCY + 201 - arrow2Bobbing, 10, 40);
+      triangle(bCX, bCY + 235 - arrow2Bobbing, bCX + 15, bCY + 220 - arrow2Bobbing, bCX - 15, bCY + 220 - arrow2Bobbing);
+      arrow2Bobbing = arrow2Bobbing + arrow2BobbingShift;
+      if(arrow2Bobbing < 0){
+        arrow2BobbingShift = 0.8;
+      }
+      if(arrow2Bobbing > 15){
+        arrow2BobbingShift = -0.8;
+      }
     }
     signColor = signColor + signColorChange;
     if(signColor > 235){

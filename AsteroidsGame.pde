@@ -18,13 +18,14 @@ int uSpeed;
 int nova;
 boolean deceleratingDown;
 boolean away;
+//int counter;
 
 public void setup(){
   size(1000,650);
   frameRate(40);
   strokeJoin(ROUND);
   fighter = new Spaceship();
-  nova = 1000;
+  nova = 4000;
   home = new Base();
         //projectile = new Bullet();
   //stars[i].setX((int)random(width));
@@ -81,7 +82,8 @@ public void draw(){
       }
     }
   }
-  if(shoot == true && frameCount % 10 == 0){
+  //counter ++;
+  if(shoot == true && frameCount % 10 == 0){ // counter
       //shoot = false;
       projectile.add(new Bullet(fighter));
   }
