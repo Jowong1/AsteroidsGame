@@ -28,6 +28,11 @@ class Base{
   private float part2ShadeChange = 1.5;
   private int novaPerParticle2 = 1;
   private int mine2UpgradeCost = 500;
+  private boolean upgrade1Closer, upgrade2Closer;
+  private float close1Gate, close2Gate;
+  private float close1GateShift = 1;
+  private float close2GateShift = 1;
+  private int countClosed, countClosed2;
 
   //private String leftBox;
   //private int uSpeed;
@@ -50,6 +55,7 @@ class Base{
       novaPerParticle1 = 10;
       mine1UpgradeCost = 2500;
       mine1Lvl = 3;
+      upgrade1Closer = true;
     }
     // LEVEL (ONE) MINE UPGRADE TO (TWO) $500 NOVA
     if(clicked == true && mine1 == true && nova >= 500 && mine1Lvl == 1 && mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY < bCY - 280 && mouseY > bCY - 450){
@@ -59,6 +65,7 @@ class Base{
       novaPerParticle1 = 5;
       mine1UpgradeCost = 1500;
       mine1Lvl = 2;
+      upgrade1Closer = true;
     }
     //MINE 2
     // LEVEL (TWO) MINE UPGRADE TO (THREE) $1500 NOVA
@@ -69,6 +76,7 @@ class Base{
       novaPerParticle2 = 10;
       mine2UpgradeCost = 2500;
       mine2Lvl = 3;
+      upgrade2Closer = true;
     }
     // LEVEL (ONE) MINE UPGRADE TO (TWO) $500 NOVA
     if(clicked == true && mine2 == true && nova >= 500 && mine2Lvl == 1 && mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY > bCY + 280 && mouseY < bCY + 450){
@@ -78,9 +86,8 @@ class Base{
       novaPerParticle2 = 5;
       mine2UpgradeCost = 1500;
       mine2Lvl = 2;
+      upgrade2Closer = true;
     }
-    
-    
     // CHECK IF ACTIVATE MINE SIGNS ARE ON
     if(clicked == true && mouseX > bCX - 80 && mouseX < bCX + 80 && mouseY < bCY - 280 && mouseY > bCY - 450){
       mine1 = true;
@@ -97,6 +104,7 @@ class Base{
       shipItems();
       shipMines();
       shipUpgrades();
+      upgradeClosers();
       shipSigns();
     }else{
       textSize(30);
@@ -109,6 +117,64 @@ class Base{
     //Reset strokeWeight and stroke
     strokeWeight(1);
     stroke(0);
+  }
+  
+  public void upgradeClosers(){
+    if(upgrade1Closer == true){
+      close1Gate = close1Gate + close1GateShift;
+      if(close1Gate > 79){
+        close1GateShift = 0;
+        countClosed++;
+      }
+      if(countClosed > 50){
+        close1GateShift = -1;
+        if(close1Gate < 2){
+          close1GateShift = 1;
+          close1Gate = 0;
+          countClosed = 0;
+          upgrade1Closer = false;
+        }
+      }
+      pushMatrix();
+      rectMode(CORNER);
+      //noStroke();
+      stroke(0,255,0,150);
+      fill(0);
+      rect(bCX - 80, bCY - 445, close1Gate, 160);
+      fill(0);
+      rect(bCX + 80, bCY - 445, -close1Gate, 160);
+      popMatrix();
+      rectMode(CENTER);
+    }
+    if(upgrade2Closer == true){
+      close2Gate = close2Gate + close2GateShift;
+      if(close2Gate > 79){
+        close2GateShift = 0;
+        countClosed2++;
+      }
+      if(countClosed2 > 50){
+        close2GateShift = -1;
+        if(close2Gate < 2){
+          close2GateShift = 1;
+          close2Gate = 0;
+          countClosed2 = 0;
+          upgrade2Closer = false;
+        }
+      }
+      if(close2Gate < 0){
+        close2GateShift = 1;
+      }
+      pushMatrix();
+      rectMode(CORNER);
+      //noStroke();
+      stroke(0,255,0,150);
+      fill(0);
+      rect(bCX - 80, bCY + 445, close2Gate, -160);
+      fill(0);
+      rect(bCX + 80, bCY + 445, -close2Gate, -160);
+      popMatrix();
+      rectMode(CENTER);
+    }
   }
   
   public void shipMines(){
