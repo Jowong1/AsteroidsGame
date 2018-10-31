@@ -1,5 +1,17 @@
+/*TO DO LIST
+-map perimeter
+-bullets
+-enemies
+-asteroids
+-collsion
+-upgrades
+-instructions manual
+-pick fighter? maybe?
+*/
+
 Spaceship fighter;
 Star[] stars = new Star[2000];
+Perimeter border;
 ArrayList <Bullet> projectile = new ArrayList<Bullet>();
 ArrayList <Asteroid> asteroids = new ArrayList<Asteroid>();
 Base home;
@@ -25,6 +37,7 @@ public void setup(){
   frameRate(40);
   strokeJoin(ROUND);
   fighter = new Spaceship();
+  border = new Perimeter();
   nova = 4000;
   home = new Base();
         //projectile = new Bullet();
@@ -43,6 +56,7 @@ public void setup(){
 
 public void draw(){
   background(0);
+  border.show();
   if(movingMouse == false){
     notMovingMouse++;
   }else{

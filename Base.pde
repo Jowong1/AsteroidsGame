@@ -1,5 +1,5 @@
 class Base{
-  private int baseCenterX, baseCenterY;//, bCX, bCY;
+  protected int baseCenterX, baseCenterY;//, bCX, bCY;
   public Base(){
     baseCenterX = 900;
     baseCenterY = 725;
@@ -8,8 +8,8 @@ class Base{
     part2Rad = 1;
     part2Shade = 0;
   }
-  private int bCX;
-  private int bCY;
+  protected int bCX;
+  protected int bCY;
   private float spinSpokes;
   private float part1Rad, part1Shade, part2Rad, part2Shade;
   private boolean mine1, mine2, activateMine1Sign, activateMine2Sign;
