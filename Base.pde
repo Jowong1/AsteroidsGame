@@ -33,6 +33,7 @@ class Base{
   private float close1GateShift = 1;
   private float close2GateShift = 1;
   private int countClosed, countClosed2;
+  private boolean inShip = false;
 
   //private String leftBox;
   //private int uSpeed;
@@ -106,7 +107,9 @@ class Base{
       shipUpgrades();
       upgradeClosers();
       shipSigns();
+      inShip = true;
     }else{
+      inShip = false;
       textSize(30);
       shipMines();
       shipExterior();
@@ -194,10 +197,12 @@ class Base{
       ellipse(bCX + 60, bCY - 305, 15, 15);
       // Legs
       stroke(150);
+      if(inShip == true){
       line(bCX - 60, bCY - 305, bCX - 20, bCY - 355);
       line(bCX + 60, bCY - 305, bCX + 20, bCY - 355);
       line(bCX - 60, bCY - 425, bCX - 20, bCY - 375);
       line(bCX + 60, bCY - 425, bCX + 20, bCY - 375);
+      }
       // Container
       noStroke();
       fill(100);

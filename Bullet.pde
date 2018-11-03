@@ -9,12 +9,13 @@ class Bullet extends Floater{
   public double getDirectionY() {return(myDirectionY);}   
   public void setPointDirection(int degrees) {myPointDirection = degrees;}   
   public double getPointDirection() {return(myPointDirection);}
-  private float dRadians = (float)(myPointDirection*(Math.PI/180));
+  
+  //private double dRadians = myPointDirection*(Math.PI/180);
   public Bullet(Spaceship fighter){
     //myCenterX = fighter.getX();
     //myCenterY = fighter.getY();
+    double dRadians = myPointDirection*(Math.PI/180);
     myPointDirection = fighter.getPointDirection();
-    //double dRadians = myPointDirection * (Math.PI/180);
     myDirectionX = 10 * Math.cos(dRadians) + fighter.getDirectionX();
     myDirectionY = 10 * Math.sin(dRadians) + fighter.getDirectionY();
   }
@@ -22,15 +23,21 @@ class Bullet extends Floater{
   public void show(){
     translate((float)myCenterX, (float)myCenterY);
     //rotate(dRadians);
+    fill(255, 0, 0, 150);
+    noStroke();
     fill(255,0, 0, 175);
     rect(40, 0, 25, 3, 50);
     // Unrotate
     //rotate(-1*dRadians);
+    //    println(myCenterX + ", " +myCenterY);
     translate(-1*(float)myCenterX, -1*(float)myCenterY);
   }
   
   public void move(){
-    myCenterX += myDirectionX;    
+    myCenterX += myDirectionX;  
     myCenterY += myDirectionY;
+    //myDirectionX = myCenterX + myDirectionX;
+    //myDirectionY = myCenterY + myDirectionY;
+    //    println(myDirectionX + ", " + myDirectionY);
   }
 }

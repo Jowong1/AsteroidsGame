@@ -31,6 +31,7 @@ int nova;
 boolean deceleratingDown;
 boolean away;
 //int counter;
+int t = 0;
 
 public void setup(){
   size(1000,650);
@@ -81,26 +82,19 @@ public void draw(){
   fighter.show();
   fighter.move();
   fighter.deceleratee();
-  for(int nI = 0;nI < projectile.size(); nI ++){
-    fill(255, 0, 0, 150);
-    noStroke();
-    projectile.get(nI).show();
-    projectile.get(nI).move();
-  }
-  for(int t = 0; t < asteroids.size(); t ++){
-    for(int j = 0; j < projectile.size(); j++){
-      if(dist(projectile.get(j).getX(),projectile.get(j).getY(), projectile.get(t).getX(), projectile.get(t).getY()) < 10){
-        projectile.remove(j);
-        asteroids.remove(t);
-        break;
-      }
-    }
-  }
-  //counter ++;
   if(shoot == true && frameCount % 10 == 0){ // counter
       //shoot = false;
       projectile.add(new Bullet(fighter));
   }
+  for(int nI = projectile.size() - 1; nI >= 0; nI --){
+    projectile.get(nI).show();
+    projectile.get(nI).move();
+  }
+  //for(int f = t; f < projectile.size(); f ++){
+  //  projectile.get(f).move();
+  //  t++;
+  //}
+  //counter ++;
   
   popMatrix();
   fill(255);

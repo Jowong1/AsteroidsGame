@@ -25,7 +25,7 @@ class Asteroid extends Floater{
     fill(255,0, 0, 175);
     rect(40, 0, 25, 3, 50);
     // Unrotate
-    rotate(-1*dRadians);
+    //rotate(-1*dRadians);
     translate(-1*(int)fighter.myCenterX, -1*(int)fighter.myCenterY);
   }
   
