@@ -1,6 +1,6 @@
 /*TO DO LIST
 -map perimeter
--bullets
+-shooters
 -enemies
 -asteroids
 -collsion
@@ -10,8 +10,8 @@
 */
 
 Spaceship fighter;
-ArrayList<Bullet> bullets;
-Star[] stars;
+ArrayList<Bullet> shooters;
+Star[] shine;
 ArrayList<Asteroids> rocks;
 boolean accel = false;
 boolean deccel = false;
@@ -20,14 +20,14 @@ boolean rotateLeft = false;
 public void setup() 
 {
   size(600,600);
-  bullets = new ArrayList<Bullet>();
+  shooters = new ArrayList<Bullet>();
   fighter = new Spaceship();
-  stars = new Star[100];
+  shine = new Star[100];
   rocks = new ArrayList<Asteroids>();
   
-  for (int i = 0; i < stars.length; i++)
+  for (int i = 0; i < shine.length; i++)
   {
-    stars[i] = new Star();
+    shine[i] = new Star();
   }
   for (int i = 0; i < 30; i++)
   {
@@ -43,9 +43,9 @@ public void draw()
   if (deccel == true) fighter.accelerate(-0.05);
   if (rotateLeft == true) fighter.turn(-5);
   if (rotateRight == true) fighter.turn(5);
-  for (int i = 0; i < stars.length; i++)
+  for (int i = 0; i < shine.length; i++)
   {
-    stars[i].show();
+    shine[i].show();
   }
   for (int i = 0; i < rocks.size(); i++)
   {
@@ -55,21 +55,21 @@ public void draw()
    if (d < 18)
      rocks.remove(i);
   }
-  for (int i = 0; i < bullets.size(); i++)
+  for (int i = 0; i < shooters.size(); i++)
   {
    
-   bullets.get(i).show();
-   bullets.get(i).move();
+   shooters.get(i).show();
+   shooters.get(i).move();
   }
   
   for(int k = 0; k < rocks.size(); k++)
   {
-    for(int j = 0; j < bullets.size(); j++)
+    for(int j = 0; j < shooters.size(); j++)
     {
-      float b = dist((float)bullets.get(j).getX(), (float)bullets.get(j).getY(), (float)rocks.get(k).getX(), (float)rocks.get(k).getY());
+      float b = dist((float)shooters.get(j).getX(), (float)shooters.get(j).getY(), (float)rocks.get(k).getX(), (float)rocks.get(k).getY());
       if(b < 20)
       {
-        bullets.remove(j);
+        shooters.remove(j);
         rocks.remove(k);
         break;
       }
@@ -95,7 +95,7 @@ public void keyPressed()
     fighter.setDirectionY(0);
   }
   if(key == ' ')
-    bullets.add(new Bullet(fighter));
+    shooters.add(new Bullet(fighter));
    
 }
 

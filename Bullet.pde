@@ -49,20 +49,20 @@ class Bullet extends Floater
     //wrap around screen    
     if(myCenterX > width)
     {     
-      bullets.remove(this);    
+      shooters.remove(this);    
     }    
     else if (myCenterX < 0)
     {     
-     bullets.remove(this);    
+     shooters.remove(this);    
     }    
     if(myCenterY > height)
     {    
-      bullets.remove(this);    
+      shooters.remove(this);    
     } 
     
     else if (myCenterY < 0)
     {     
-      bullets.remove(this);    
+      shooters.remove(this);    
     }  
   }
 }
