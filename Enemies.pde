@@ -1,4 +1,0 @@
-class Enemies{
-  public Enemies(){
-  }
-}
