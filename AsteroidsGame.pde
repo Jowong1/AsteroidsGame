@@ -1,108 +1,85 @@
-/*TO DO LIST
--map perimeter
--shooters
--enemies
--asteroids
--collsion
--upgrades
--instructions manual
--pick fighter? maybe?
-*/
-
-Spaceship fighter;
-ArrayList<Bullet> shooters;
-Star[] shine;
-ArrayList<Asteroids> rocks;
-boolean accel = false;
-boolean deccel = false;
-boolean rotateRight = false;
-boolean rotateLeft = false;
+SpaceShip fighter;
+Stars [] sky;
+ArrayList <Asteroid> rocks = new ArrayList <Asteroid>();
+ArrayList <Bullet> bill = new ArrayList <Bullet>();
 public void setup() 
 {
-  size(600,600);
-  shooters = new ArrayList<Bullet>();
-  fighter = new Spaceship();
-  shine = new Star[100];
-  rocks = new ArrayList<Asteroids>();
-  
-  for (int i = 0; i < shine.length; i++)
-  {
-    shine[i] = new Star();
-  }
-  for (int i = 0; i < 30; i++)
-  {
-    rocks.add(new Asteroids());
-  }
-  //your code here
+  size(750,750);
+  fighter = new SpaceShip();
+  sky = new Stars[100];
+  for(int i = 0; i < sky.length; i++)
+    {
+      sky[i] = new Stars();
+    }
+    for(int i = 0; i < 20; i++)
+    {
+      rocks.add(new Asteroid());
+    }
+
 }
 public void draw() 
 {
   background(0);
   
-  if (accel == true) fighter.accelerate(0.05);
-  if (deccel == true) fighter.accelerate(-0.05);
-  if (rotateLeft == true) fighter.turn(-5);
-  if (rotateRight == true) fighter.turn(5);
-  for (int i = 0; i < shine.length; i++)
-  {
-    shine[i].show();
-  }
-  for (int i = 0; i < rocks.size(); i++)
-  {
-   rocks.get(i).show();
-   rocks.get(i).move();
-   float d = dist(fighter.getX(),fighter.getY(),rocks.get(i).getX(),rocks.get(i).getY());
-   if (d < 18)
-     rocks.remove(i);
-  }
-  for (int i = 0; i < shooters.size(); i++)
-  {
-   
-   shooters.get(i).show();
-   shooters.get(i).move();
-  }
-  
-  for(int k = 0; k < rocks.size(); k++)
-  {
-    for(int j = 0; j < shooters.size(); j++)
+  for(int i = 0; i < sky.length; i++)
     {
-      float b = dist((float)shooters.get(j).getX(), (float)shooters.get(j).getY(), (float)rocks.get(k).getX(), (float)rocks.get(k).getY());
-      if(b < 20)
-      {
-        shooters.remove(j);
-        rocks.remove(k);
-        break;
-      }
+      sky[i].show();
+    }
+
+  for(int i = 0; i < rocks.size(); i++)
+  {
+    rocks.get(i).show();
+    rocks.get(i).move();
+  }
+
+
+  for (int i = 0; i < bill.size(); i++)
+  {
+    bill.get(i).show();
+    bill.get(i).move();
+  }
+  for (int i = 0; i < bill.size(); i++)
+  {
+    for (int j = 0; j < rocks.size(); j++)
+    {
+      if(dist(bill.get(i).getX(), bill.get(i).getY(), rocks.get(j).getX(), rocks.get(j).getY()) < 20)
+        rocks.remove(j);
     }
   }
   fighter.show();
   fighter.move();
-  
+
+
 }
+ 
 public void keyPressed()
 {
-  if(keyCode == UP)accel = true;
-  if(keyCode == LEFT)rotateLeft = true;
-  if(keyCode == RIGHT)rotateRight = true;
-  if(keyCode == DOWN) deccel = true;
-  //hyperspace
-  if(keyCode == 72)
+  if (key == ' ')
   {
-    fighter.setX((int)(Math.random()*width));
-    fighter.setY((int)(Math.random()*height));
-    fighter.setPointDirection((int)(Math.random()*360));
+    bill.add(new Bullet(fighter));
+  }
+  if (key == 'w')
+  {
+    fighter.accelerate(.2);
+  }
+  if (key == 's')
+  {
+    fighter.accelerate(-.2);
+  }
+  if (key == 'a')
+  {
+    fighter.rotate(-12);
+  }
+  if (key == 'd')
+  {
+    fighter.rotate(12);
+  }
+  if (key == 'h')
+  {
+    fighter.setX((int)(Math.random()*800));
+    fighter.setY((int)(Math.random()*800));
     fighter.setDirectionX(0);
     fighter.setDirectionY(0);
+    fighter.setPointDirection((int)(Math.random()*360));
   }
-  if(key == ' ')
-    shooters.add(new Bullet(fighter));
-   
-}
-
-void keyReleased()
-{
-  if (keyCode == UP) accel = false;
-  if (keyCode == LEFT) rotateLeft = false;
-  if (keyCode == RIGHT) rotateRight = false;
-  if (keyCode == DOWN) deccel = false;
 }
