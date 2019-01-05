@@ -13,12 +13,10 @@ Spaceship fighter;
 ArrayList<Bullet> bullets;
 Star[] stars;
 ArrayList<Asteroids> rocks;
-
 boolean accel = false;
 boolean deccel = false;
 boolean rotateRight = false;
 boolean rotateLeft = false;
-
 public void setup() 
 {
   size(600,600);
