@@ -1,36 +1,44 @@
-class Asteroid extends Floater{
-  public void setX(int x){myCenterX = x;}
-  public int getX() {return((int)myCenterX);}
-  public void setY(int y) {myCenterY = y;}
-  public int getY() {return((int)myCenterY);}
-  public void setDirectionX(double x) {myDirectionX = x;}   
-  public double getDirectionX() {return(myDirectionX);}
-  public void setDirectionY(double y) {myDirectionY = y;}   
-  public double getDirectionY() {return(myDirectionY);}   
-  public void setPointDirection(int degrees) {myPointDirection = degrees;}   
-  public double getPointDirection() {return(myPointDirection);}
-  float dRadians = (float)(myPointDirection*(Math.PI/180));
-  public Asteroid(){
-    //myCenterX = ship.getX();
-    //myCenterY = ship.getY();
-    //myPointDirection = ship.getPointDirection();
-    //double dRadians = myPointDirection * (Math.PI/180);
-    myDirectionX = 10 * Math.cos(dRadians) + fighter.getDirectionX();
-    myDirectionY = 10 * Math.sin(dRadians) + fighter.getDirectionY();
+class Asteroids extends Floater
+{
+  private int rotSpeed;
+  public Asteroids(){
+    corners = 7;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0] = -11;
+    yCorners[0] = -8;
+    xCorners[1] = -2;
+    yCorners[1] = -10;
+    xCorners[2] = 13;
+    yCorners[2] = 0;
+    xCorners[3] = 7;
+    yCorners[3] = 8;
+    xCorners[4] = -2;
+    yCorners[4] = 10;
+    xCorners[5] = -13;
+    yCorners[5] = 0;
+    
+    myColor = color(150);
+    myCenterX = (Math.random()*width);
+    myCenterY = (Math.random()*width);
+    myDirectionX = (Math.random());
+    myDirectionY = (Math.random());
+    myPointDirection = 0;
+    rotSpeed = (int)(Math.random()*8)-4;
   }
-  
-  public void show(){
-    translate((int)fighter.myCenterX - 400, (int)fighter.myCenterY - 250);
-    rotate(dRadians);
-    fill(255,0, 0, 175);
-    rect(40, 0, 25, 3, 50);
-    // Unrotate
-    //rotate(-1*dRadians);
-    translate(-1*(int)fighter.myCenterX, -1*(int)fighter.myCenterY);
+  public void move()
+  {
+    super.move();
+    turn(rotSpeed);
   }
-  
-  public void move(){
-    myCenterX += myDirectionX;    
-    myCenterY += myDirectionY;
-  }
+  public void setX(int x){myCenterX = x;}  
+  public int getX(){return (int)myCenterX;}
+  public void setY(int y){myCenterY = y;} 
+  public int getY(){return (int)myCenterY;}   
+  public void setDirectionX(double x){myDirectionX = x;}   
+  public double getDirectionX(){return myDirectionX;}   
+  public void setDirectionY(double y){myDirectionY = y;}   
+  public double getDirectionY(){return myDirectionY;}   
+  public void setPointDirection(int degrees){myPointDirection = degrees;}   
+  public double getPointDirection(){return myPointDirection;} 
 }
